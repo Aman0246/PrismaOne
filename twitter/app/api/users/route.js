@@ -7,6 +7,7 @@ import { NextResponse } from "next/server";
 //get all users
 export async function GET(){
   try {
+    //find with populate
       const user = await prisma.User.findMany({include:{tweets:true,_count:true}})
       return NextResponse.json(user)
   } catch (error) {
