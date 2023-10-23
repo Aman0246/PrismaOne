@@ -1,6 +1,13 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+
+//npm install prisma --save-dev
+//npm install @prisma/client
+//npx prisma init
+// npx prisma generate
 // npx prisma db push  
+
 
 generator client {
   provider = "prisma-client-js"
@@ -13,8 +20,8 @@ datasource db {
 
 model User {
   id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  name     String
-  email    String
+  name     String 
+  email    String  
   password String
   tweets   Tweets[]
 }
