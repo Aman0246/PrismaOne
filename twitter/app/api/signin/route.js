@@ -1,8 +1,10 @@
 import { prisma } from "@/prisma";
 import { NextResponse } from "next/server";
+import jwt from 'jsonwebtoken';
 
 //Login
 export async function POST(request) {
+  
   try {
     const {  email, password } = await request.json();
     if ( !email || !password)
@@ -18,9 +20,9 @@ export async function POST(request) {
       return NextResponse.json({ status: false, message: "Register first" },{status:400});
 
     if(userExist.password!=password)return NextResponse.json({ status: false, message: "Worng Password" },{status:400});
-    
+    var token = jwt.sign({id: userExist._id },process.env.JWT);
     return NextResponse.json(
-      { status: true, message: "Login", userExist },
+      { status: true, message: "Login", userExist,token },
       { status: 200 }
     );
   } catch (error) {
