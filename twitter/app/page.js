@@ -1,8 +1,17 @@
+"use client"
 import Image from 'next/image'
+import {signIn, signOut} from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 
 export default function Home() {
+  const session = useSession()
+  console.log(session)
   return (
-    < >
+    <main>
+      <button onClick={()=>signIn('google')} className='bg-green-500 p-5  rounded-sm'>Google</button>
+      <button onClick={()=>signOut('google')} className='bg-red-500 p-5  rounded-sm'>GoogleSignout</button>
+      <button onClick={()=>signIn('github')} className='bg-green-500 p-5  rounded-sm text-black'>Github</button>
+      <button onClick={()=>signIn('github')} className='bg-red-500 p-5  rounded-sm'>Github OUT</button>
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
           Get started by editing&nbsp;
@@ -108,6 +117,6 @@ export default function Home() {
           </p>
         </a>
       </div>
-    </>
+    </main>
   )
 }
